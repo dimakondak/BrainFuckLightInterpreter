@@ -3,15 +3,15 @@ package com.kondak.visitor;
 import com.kondak.commands.*;
 
 public interface CommandVisitor {
-    void visit(IncrementCommand ic);
+    void visit(IncrementCommand incrementCommand);
 
-    void visit(DecrementCommand dc);
+    void visit(DecrementCommand decrementCommand);
 
-    void visit(LeftShiftCommand lc);
+    void visit(LeftShiftCommand leftShiftCommand);
 
-    void visit(RightShiftCommand rc);
+    void visit(RightShiftCommand rightShiftCommand);
 
-    void visit(OutputCommand oc);
+    void visit(OutputCommand outputCommand);
 
-    void visit(BracketCommand bc);
+    void visit(BracketCommand bracketCommand);
 }

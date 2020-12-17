@@ -52,33 +52,33 @@ public class CommandParserVisitor implements CommandVisitor {
     }
 
     @Override
-    public void visit(IncrementCommand ic) {
-        this.addCommand(ic);
+    public void visit(IncrementCommand incrementCommand) {
+        this.addCommand(incrementCommand);
     }
 
     @Override
-    public void visit(DecrementCommand dc) {
-        this.addCommand(dc);
+    public void visit(DecrementCommand decrementCommand) {
+        this.addCommand(decrementCommand);
     }
 
     @Override
-    public void visit(LeftShiftCommand lc) {
-        this.addCommand(lc);
+    public void visit(LeftShiftCommand leftShiftCommand) {
+        this.addCommand(leftShiftCommand);
     }
 
     @Override
-    public void visit(RightShiftCommand rc) {
-        this.addCommand(rc);
+    public void visit(RightShiftCommand rightShiftCommand) {
+        this.addCommand(rightShiftCommand);
     }
 
     @Override
-    public void visit(OutputCommand oc) {
-        this.addCommand(oc);
+    public void visit(OutputCommand outputCommand) {
+        this.addCommand(outputCommand);
     }
 
     @Override
-    public void visit(BracketCommand bc) {
-        if (bc.isStartOfLoop()) {
+    public void visit(BracketCommand bracketCommand) {
+        if (bracketCommand.isStartOfLoop()) {
             this.pushNode();
         } else {
             this.popNode();
