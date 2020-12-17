@@ -25,14 +25,11 @@ public class Executor {
     }
 
     private boolean isCodeValid(String code) {
-        boolean result;
         if (code == null || code.trim().isEmpty()) {
             log.error("Caught empty expression");
-            result = false;
-        } else {
-            result = true;
+            return false;
         }
-        return result;
+        return true;
     }
 
     private List<Command> parseStringToCommands(String code) {
