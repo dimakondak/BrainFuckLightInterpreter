@@ -78,6 +78,20 @@ class CommandParserVisitorTest {
         assertEquals(BracketCommand.class, commandParser.getCommandList(CODE).get(0).getClass());
     }
 
+    @DisplayName("throw IllegalArgumentException when used unexpected character")
+    @Test
+    void testUnexpectedCharacter() {
+        Map<Character, Command> commands = mock(HashMap.class);
+        when(commands.containsKey('*')).thenReturn(false);
+
+        commandParser = new CommandParserVisitor(commands);
+        String CODE = "*";
+
+        assertThrows(IllegalArgumentException.class,
+                () -> commandParser.getCommandList(CODE),
+                "Unexpected value: " + CODE);
+    }
+
     @DisplayName("throw NoSuchElementException when missing bracket.")
     @Test
     void testEmptyTaskList() {
