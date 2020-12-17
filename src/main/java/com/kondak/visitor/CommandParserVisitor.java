@@ -26,6 +26,9 @@ public class CommandParserVisitor implements CommandVisitor {
         for (char character : validCode.toCharArray()) {
             if (this.commands.containsKey(character)) {
                 this.commands.get(character).accept(this);
+            } else {
+                log.error("Got unknown command");
+                throw new IllegalArgumentException();
             }
         }
         return currentNode.peekFirst();
