@@ -16,7 +16,7 @@ class ExecutorTest {
     void testNullCode() {
         CODE = null;
         assertThrows(IllegalArgumentException.class,
-                () -> testInstance.validate(CODE),
+                () -> testInstance.execute(CODE),
                 "Expression is empty");
     }
 
@@ -25,7 +25,7 @@ class ExecutorTest {
     void testEmptyCode() {
         CODE = "";
         assertThrows(IllegalArgumentException.class,
-                () -> testInstance.validate(CODE),
+                () -> testInstance.execute(CODE),
                 "Expression is empty");
     }
 
@@ -34,7 +34,7 @@ class ExecutorTest {
     void testEmptySpacesCode() {
         CODE = "        ";
         assertThrows(IllegalArgumentException.class,
-                () -> testInstance.validate(CODE),
+                () -> testInstance.execute(CODE),
                 "Expression is empty");
     }
 
