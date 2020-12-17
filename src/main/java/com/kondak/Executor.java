@@ -15,26 +15,29 @@ public class Executor {
     private static final Logger log = LogManager.getLogger();
 
     public void execute(String code) {
-        List<Command> taskList = this.parseStringToCommands(this.validate(code));
-
-        taskList.forEach(Command::execute);
-        log.info("Code executed");
-    }
-
-    public String validate(String code) {
-        if (code == null || code.trim().isEmpty()) {
-            log.error("Caught empty expression");
-            throw new IllegalArgumentException("Expression is empty");
+        if (this.isCodeValid(code)) {
+            this.parseStringToCommands(code).forEach(Command::execute);
+            log.info("Code executed");
         } else {
-            return code;
+            log.info("Something gone wrong");
+            throw new IllegalArgumentException();
         }
     }
 
-    private List<Command> parseStringToCommands(String validCode) {
+    private boolean isCodeValid(String code) {
+        boolean result;
+        if (code == null || code.trim().isEmpty()) {
+            log.error("Caught empty expression");
+            result = false;
+        } else {
+            result = true;
+        }
+        return result;
+    }
+
+    private List<Command> parseStringToCommands(String code) {
         CommandParserVisitor parser = new CommandParserVisitor(new CommandFactory().getCommands());
-
         log.info("Staring parsing the code and composite a list of commands");
-
-        return parser.getCommandList(validCode);
+        return parser.getCommandList(code);
     }
 }
