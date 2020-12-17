@@ -4,7 +4,8 @@ import com.kondak.environment.Environment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ExecutorTest {
     private static final Executor testInstance = new Executor();
@@ -70,4 +71,51 @@ class ExecutorTest {
         assertArrayEquals(expected.toCharArray(), actual.toCharArray());
     }
 
+    @Test()
+    void executeTeamDevInternshipCode() {
+        String expected = "TeamDev Internship";
+
+        Environment environment = Environment.getInstance();
+        environment.reset();
+
+
+        CODE = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++++++++++++++.>+.----.++++++++++++.<----------------.>--------.+++++++++++++++++.<<++.>+++++.>--------.++++++.---------------.+++++++++++++.----.+++++.-----------.+.+++++++.";
+        testInstance.execute(CODE);
+
+        String actual = environment.getOutputArr().trim();
+
+        assertArrayEquals(expected.toCharArray(), actual.toCharArray());
+    }
+
+    @Test()
+    void executeJavaClassesCode() {
+        String expected = "Java Classes";
+
+        Environment environment = Environment.getInstance();
+        environment.reset();
+
+
+        CODE = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++++.>---.+++++++++++++++++++++.---------------------.<<++.>-------.>+++++++++++.-----------.++++++++++++++++++..--------------.++++++++++++++.";
+        testInstance.execute(CODE);
+
+        String actual = environment.getOutputArr().trim();
+
+        assertArrayEquals(expected.toCharArray(), actual.toCharArray());
+    }
+
+    @Test()
+    void executeMyDreamCode() {
+        String expected = "My Dream";
+
+        Environment environment = Environment.getInstance();
+        environment.reset();
+
+
+        CODE = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>+++++++.>+++++++++++++++++++++.<<++.>---------.>-------.-------------.----.++++++++++++.";
+        testInstance.execute(CODE);
+
+        String actual = environment.getOutputArr().trim();
+
+        assertArrayEquals(expected.toCharArray(), actual.toCharArray());
+    }
 }
