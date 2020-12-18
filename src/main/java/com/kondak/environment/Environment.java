@@ -75,7 +75,7 @@ public class Environment {
     }
 
     public void output() {
-        String letter = Character.toString(this.arr[this.cursor]);
+        char letter = Character.toChars(this.arr[this.cursor])[0];
         System.out.print(letter);
         this.outputArr += (letter);
     }
