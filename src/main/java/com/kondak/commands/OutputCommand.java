@@ -8,9 +8,14 @@ import com.kondak.visitor.CommandVisitor;
  */
 public class OutputCommand implements Command {
 
+    private final Environment environment;
+
+    public OutputCommand(Environment environment) {
+        this.environment = environment;
+    }
+
     @Override
     public void execute() {
-        Environment environment = Environment.getInstance();
         environment.output();
     }
 

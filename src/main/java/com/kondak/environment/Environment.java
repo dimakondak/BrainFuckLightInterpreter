@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 
 /**
- * Class Environment (singleton) contains the main working array and methods that change it
+ * Class Environment contains the main working array and methods that change it
  */
 public class Environment {
     private static final Logger log = LogManager.getLogger();
@@ -23,17 +23,7 @@ public class Environment {
 
     private String outputArr = "";
 
-    private static Environment instance;
-
-    public static Environment getInstance() {
-        if (instance == null) {
-            instance = new Environment();
-            log.info("Work environment initialized");
-        }
-        return instance;
-    }
-
-    private Environment() {
+    public Environment() {
         arr = new int[MAX_SIZE];
         Arrays.fill(arr, 0);
     }

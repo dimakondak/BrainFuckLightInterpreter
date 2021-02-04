@@ -14,4 +14,6 @@ public interface CommandVisitor {
     void visit(OutputCommand outputCommand);
 
     void visit(BracketCommand bracketCommand);
+
+    void visit(CompositeBracketCommand compositeBracketCommand);
 }

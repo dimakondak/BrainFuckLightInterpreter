@@ -8,9 +8,14 @@ import com.kondak.visitor.CommandVisitor;
  */
 public class RightShiftCommand implements Command {
 
+    private final Environment environment;
+
+    public RightShiftCommand(Environment environment) {
+        this.environment = environment;
+    }
+
     @Override
     public void execute() {
-        Environment environment = Environment.getInstance();
         environment.rightShift();
     }
 

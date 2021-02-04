@@ -12,10 +12,10 @@ import java.util.*;
 public class CommandParserVisitor implements CommandVisitor {
     private static final Logger log = LogManager.getLogger();
     private final Deque<List<Command>> currentNode;
-    private final Map<Character, Command> commands;
+    private final Map<Character, CommandGetter> commands;
 
     //CommandParserVisitor composite the commands as tree
-    public CommandParserVisitor(Map<Character, Command> commands) {
+    public CommandParserVisitor(Map<Character, CommandGetter> commands) {
         currentNode = new LinkedList<>();
         currentNode.addFirst(new LinkedList<>());
 
@@ -25,7 +25,7 @@ public class CommandParserVisitor implements CommandVisitor {
     public List<Command> getCommandList(String validCode) {
         for (char character : validCode.toCharArray()) {
             if (this.commands.containsKey(character)) {
-                this.commands.get(character).accept(this);
+                this.commands.get(character).getCommand().accept(this);
             } else {
                 log.error("Got unknown command");
                 throw new IllegalArgumentException();
@@ -47,11 +47,6 @@ public class CommandParserVisitor implements CommandVisitor {
     //if the parser meets a right bracket, a new array is created
     private void pushNode() {
         this.currentNode.push(new LinkedList<>());
-    }
-
-    //if the parser meets a left bracket(container), the array is placed in it
-    private void popNode() {
-        this.addCommand(new BracketCommand(this.currentNode.pop()));
     }
 
     @Override
@@ -81,10 +76,14 @@ public class CommandParserVisitor implements CommandVisitor {
 
     @Override
     public void visit(BracketCommand bracketCommand) {
-        if (bracketCommand.isStartOfLoop()) {
-            this.pushNode();
-        } else {
-            this.popNode();
-        }
+        this.pushNode();
+        this.addCommand(bracketCommand);
+    }
+
+    //if the parser meets a left bracket(container), the array is placed in it
+    @Override
+    public void visit(CompositeBracketCommand compositeBracketCommand) {
+        compositeBracketCommand.setCommands(this.currentNode.pop());
+        this.addCommand(compositeBracketCommand);
     }
 }

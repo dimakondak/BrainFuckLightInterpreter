@@ -8,9 +8,14 @@ import com.kondak.visitor.CommandVisitor;
  */
 public class DecrementCommand implements Command {
 
+    private final Environment environment;
+
+    public DecrementCommand(Environment environment) {
+        this.environment = environment;
+    }
+
     @Override
     public void execute() {
-        Environment environment = Environment.getInstance();
         environment.decrement();
     }
 

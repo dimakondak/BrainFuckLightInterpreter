@@ -8,9 +8,14 @@ import com.kondak.visitor.CommandVisitor;
  */
 public class IncrementCommand implements Command {
 
+    private final Environment environment;
+
+    public IncrementCommand(Environment environment) {
+        this.environment = environment;
+    }
+
     @Override
     public void execute() {
-        Environment environment = Environment.getInstance();
         environment.increment();
     }
 
