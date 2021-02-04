@@ -1,6 +1,7 @@
 package com.kondak.visitor;
 
 import com.kondak.commands.*;
+import com.kondak.environment.Environment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +19,10 @@ class CommandParserVisitorTest {
 
     @Test
     void getTaskListTestIncrementCommand() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey('+')).thenReturn(true);
-        when(commands.get('+')).thenReturn(new IncrementCommand());
+        when(commands.get('+')).thenReturn(() -> new IncrementCommand(environment));
 
         commandParser = new CommandParserVisitor(commands);
         String CODE = "+";
@@ -30,9 +32,10 @@ class CommandParserVisitorTest {
 
     @Test
     void getTaskListTestDecrementCommand() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey('-')).thenReturn(true);
-        when(commands.get('-')).thenReturn(new DecrementCommand());
+        when(commands.get('-')).thenReturn(() -> new DecrementCommand(environment));
 
         commandParser = new CommandParserVisitor(commands);
         String CODE = "-";
@@ -42,9 +45,10 @@ class CommandParserVisitorTest {
 
     @Test
     void getTaskListTestRightShiftCommand() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey('>')).thenReturn(true);
-        when(commands.get('>')).thenReturn(new RightShiftCommand());
+        when(commands.get('>')).thenReturn(() -> new RightShiftCommand(environment));
 
         commandParser = new CommandParserVisitor(commands);
         String CODE = ">";
@@ -54,9 +58,10 @@ class CommandParserVisitorTest {
 
     @Test
     void getTaskListTestLeftShiftCommand() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey('<')).thenReturn(true);
-        when(commands.get('<')).thenReturn(new LeftShiftCommand());
+        when(commands.get('<')).thenReturn(() -> new LeftShiftCommand(environment));
 
         commandParser = new CommandParserVisitor(commands);
         String CODE = "<";
@@ -66,22 +71,24 @@ class CommandParserVisitorTest {
 
     @Test
     void getTaskListTestBracketsCommand() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey(']')).thenReturn(true);
-        when(commands.get(']')).thenReturn(new BracketCommand(false));
+        when(commands.get(']')).thenReturn(() -> new CompositeBracketCommand(environment));
         when(commands.containsKey('[')).thenReturn(true);
-        when(commands.get('[')).thenReturn(new BracketCommand(true));
+        when(commands.get('[')).thenReturn(BracketCommand::new);
 
         commandParser = new CommandParserVisitor(commands);
         String CODE = "[]";
 
-        assertEquals(BracketCommand.class, commandParser.getCommandList(CODE).get(0).getClass());
+        assertEquals(CompositeBracketCommand.class, commandParser.getCommandList(CODE).get(0).getClass());
     }
 
     @DisplayName("throw IllegalArgumentException when used unexpected character")
     @Test
     void testUnexpectedCharacter() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey('*')).thenReturn(false);
 
         commandParser = new CommandParserVisitor(commands);
@@ -95,9 +102,10 @@ class CommandParserVisitorTest {
     @DisplayName("throw NoSuchElementException when missing bracket.")
     @Test
     void testEmptyTaskList() {
-        Map<Character, Command> commands = mock(HashMap.class);
+        Environment environment = mock(Environment.class);
+        Map<Character, CommandGetter> commands = mock(HashMap.class);
         when(commands.containsKey(']')).thenReturn(true);
-        when(commands.get(']')).thenReturn(new BracketCommand(false));
+        when(commands.get(']')).thenReturn(() -> new CompositeBracketCommand(environment));
 
         commandParser = new CommandParserVisitor(commands);
         String CODE = "]";

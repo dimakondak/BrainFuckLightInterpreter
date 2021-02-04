@@ -14,13 +14,7 @@ class EnvironmentTest {
 
     @BeforeAll
     public static void init() {
-        testInstance = Environment.getInstance();
-    }
-
-    @Test
-    void checkSingleton() {
-        Environment actual = Environment.getInstance();
-        assertEquals(testInstance, actual);
+        testInstance = new Environment();
     }
 
     @DisplayName("throw ArrayIndexOutOfBoundsException when cursor > " + MAX_SIZE)

@@ -1,6 +1,5 @@
 package com.kondak;
 
-import com.kondak.environment.Environment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -43,14 +42,10 @@ class ExecutorTest {
     void executeHelloWorldCode() {
         String expected = "Hello World!";
 
-        Environment environment = Environment.getInstance();
-        environment.reset();
-
-
         CODE = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
         testInstance.execute(CODE);
 
-        String actual = environment.getOutputArr().trim();
+        String actual = testInstance.getResult();
 
         assertArrayEquals(expected.toCharArray(), actual.toCharArray());
     }
@@ -59,14 +54,10 @@ class ExecutorTest {
     void executeHelloWorld2Code() {
         String expected = "Hello World!";
 
-        Environment environment = Environment.getInstance();
-        environment.reset();
-
-
         CODE = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
         testInstance.execute(CODE);
 
-        String actual = environment.getOutputArr().trim();
+        String actual = testInstance.getResult();
 
         assertArrayEquals(expected.toCharArray(), actual.toCharArray());
     }
@@ -75,14 +66,10 @@ class ExecutorTest {
     void executeTeamDevInternshipCode() {
         String expected = "TeamDev Internship";
 
-        Environment environment = Environment.getInstance();
-        environment.reset();
-
-
         CODE = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++++++++++++++.>+.----.++++++++++++.<----------------.>--------.+++++++++++++++++.<<++.>+++++.>--------.++++++.---------------.+++++++++++++.----.+++++.-----------.+.+++++++.";
         testInstance.execute(CODE);
 
-        String actual = environment.getOutputArr().trim();
+        String actual = testInstance.getResult();
 
         assertArrayEquals(expected.toCharArray(), actual.toCharArray());
     }
@@ -91,14 +78,10 @@ class ExecutorTest {
     void executeJavaClassesCode() {
         String expected = "Java Classes";
 
-        Environment environment = Environment.getInstance();
-        environment.reset();
-
-
         CODE = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++++.>---.+++++++++++++++++++++.---------------------.<<++.>-------.>+++++++++++.-----------.++++++++++++++++++..--------------.++++++++++++++.";
         testInstance.execute(CODE);
 
-        String actual = environment.getOutputArr().trim();
+        String actual = testInstance.getResult();
 
         assertArrayEquals(expected.toCharArray(), actual.toCharArray());
     }
@@ -107,14 +90,10 @@ class ExecutorTest {
     void executeMyDreamCode() {
         String expected = "My Dream";
 
-        Environment environment = Environment.getInstance();
-        environment.reset();
-
-
         CODE = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>+++++++.>+++++++++++++++++++++.<<++.>---------.>-------.-------------.----.++++++++++++.";
         testInstance.execute(CODE);
 
-        String actual = environment.getOutputArr().trim();
+        String actual = testInstance.getResult();
 
         assertArrayEquals(expected.toCharArray(), actual.toCharArray());
     }
